@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Job Finder Portal{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'blog/css/styles.css' %}">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Job Finder Portal</h1>
+    <nav>
+      <a href="{% url 'index' %}">Home</a>
+      <a href="#">Jobs</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Main Container -->
+  <div class="container">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Job Finder Portal. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop">↑</button>
+
+  <script>
+    const backToTop = document.getElementById("backToTop");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        backToTop.style.display = "block";
+      } else {
+        backToTop.style.display = "none";
+      }
+    });
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
+</body>
+</html>

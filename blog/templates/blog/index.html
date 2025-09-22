@@ -1,0 +1,50 @@
+{% extends "blog/base.html" %}
+
+{% block title %}Home - Job Finder{% endblock %}
+
+{% block content %}
+  <main>
+    <!-- Search Bar -->     
+    <div class="search-bar">
+      <form method="GET" action="{% url 'index' %}">
+      <input type="text" id="searchInput" name="q" placeholder="Search jobs..." value="{{ query|default:'' }}">
+      </form>
+    </div>
+
+  <!-- Job Listings Grid -->
+  <section class="jobs">
+    {% for job in jobs %}
+      <div class="job-card show">
+        <h3> <a href="{% url 'job_detail' job.slug %}">{{ job.job_title }}</a></h3>
+        <p><strong>Company:</strong> {{ job.company_name }}</p>
+        <p><strong>Category:</strong> {{ job.job_category }}</p>
+        <a href="{% url 'job_detail' job.slug %}">
+          <button>View Details</button>
+        </a>
+      </div>
+    {% empty %}
+      <p>No jobs found.</p>
+    {% endfor %}
+  </section>
+
+  <!-- Load More Button -->
+  <button id="loadMore">Load More</button>
+
+  </main>
+
+  <!-- Sidebar -->
+  <aside>
+    <h3>Popular Posts</h3>
+    <ul class="popular-posts">
+      {% for job in jobs %}
+      <li><a href="{% url 'job_detail' job.slug %}">{{ job.job_title }}</a></li>
+      {% endfor %}
+    </ul>
+    <h3>Categories</h3>
+    <div class="categories">
+      {% for category in categories %}
+        <a href="#">{{ category.name }}</a>
+      {% endfor %}
+    </div>
+  </aside>
+{% endblock %}

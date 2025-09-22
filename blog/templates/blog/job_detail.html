@@ -1,0 +1,30 @@
+{% extends "blog/base.html" %}
+
+{% block title %}{{ job.job_title }} - Job Detail{% endblock %}
+
+{% block content %}
+  <!-- Job Detail Section -->
+  <section class="job-detail">
+    <h2>{{ job.job_title }}</h2>
+    <p><strong>Company:</strong> {{ job.company_name }}</p>
+    <p><strong>Type:</strong> {{ job.job_type }}</p>
+    <p><strong>Category:</strong> {{ job.job_category }}</p>
+    <p><strong>Published:</strong> {{ job.published_date|date:"F j, Y" }}</p>
+
+    <div class="blog-content">
+      {{ job.blog_detail|safe }}
+    </div>
+
+    <a href="#" class="btn">Apply Now</a>
+  </section>
+
+  <!-- Sidebar -->
+  <aside>
+    <h3>Related Jobs</h3>
+    <ul>
+      {% for related in related_jobs %}
+        <li><a href="{% url 'job_detail' related.slug %}">{{ related.job_title }}</a></li>
+      {% endfor %}
+    </ul>
+  </aside>
+{% endblock %}
